@@ -9,19 +9,22 @@ block content
 	script(type="text/javascript")!= "var myData = " + JSON.stringify(data)+"; console.log(myData);"
 	
 	script.
+		var svg;
 		function changeColor(){
-			var sel = d3.select(document.getElementById("world").contentDocument).selectAll("path")/
-			if(sel.empty()) {
+			svg = d3.select(document.getElementById("world").contentDocument)//.selectAll("path")
+			if(svg.empty()) {
 				setTimeout(changeColor, 100);
 			} else {
-				//sel.attr("fill", "red");
+				svg.selectAll("path").attr("fill", "red");
+				svg.select("#AU").attr("fill", "yellow");
+				//d3.select("#AU").attr("fill", "yellow");
 				fillColorPopulation()
 			}
 		}
 		changeColor()
 		
 		function fillColorPopulation(){
-		
+			//myDa
 		}
 		
 	//script.
