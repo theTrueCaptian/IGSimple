@@ -1,0 +1,3 @@
+select * from data.html.cssselect where url="http://net.tutsplus.com/" and css=".post_title a"
+
+select * from data.html.cssselect where url="http://www.pewforum.org/2011/01/27/table-muslim-population-by-country/" and css=".highlight sortable adaptive stickyHeader highlight-first-column"
