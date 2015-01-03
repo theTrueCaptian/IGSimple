@@ -3,8 +3,9 @@ extends layout
 block content
 	h1= title
 	p Welcome to #{title}
- 
-	object(id="world" onload="changeColor()" width="1000" height="600" type="image/svg+xml" data="/images/worldLow_final_named.svg")
+	
+	img(src="/images/legend.png")
+	object(id="world" onload="changeColor()" width="1000" height="650" type="image/svg+xml" data="/images/worldLow_final_named.svg")
 	
 	script(type="text/javascript")!= "var myData = " + JSON.stringify(data)+"; console.log(myData);"
 	
@@ -15,9 +16,9 @@ block content
 			if(svg.empty()) {
 				setTimeout(changeColor, 100);
 			} else {
-				svg.selectAll("path").attr("fill", "red");
-				svg.select("#AU").attr("fill", "yellow");
-				svg.select('path[title="Afghanistan"]').attr("fill", "#dd1c77");
+				//svg.selectAll("path").attr("fill", "red");
+				//svg.select("#AU").attr("fill", "yellow");
+				//svg.select('path[title="Afghanistan"]').attr("fill", "#dd1c77");
 				
 				//d3.select("#AU").attr("fill", "yellow");
 				fillColorPopulation()
@@ -26,11 +27,46 @@ block content
 		changeColor()
 		
 		function fillColorPopulation(){
-			//myDa
 			//Traverse the data sent my server in myData
-			myData.tbody.tr.forEach(){
 			
-			}
+			myData.tbody.tr.forEach(function(row){
+				var country = row.td[0].p;
+				
+				//Extract the percentage from the string
+				var populationPercentageStr = row.td[4].p
+				var pattern = /[0-9]+\.[0-9]+/;
+				var populationPercentage = parseFloat(pattern.exec(populationPercentageStr));
+
+				console.log(country+" "+populationPercentage)
+
+				try{
+					var selCountry = svg.select('path[title=\''+country+'\']')
+					if(populationPercentage>=90.0){
+						selCountry.attr("fill", "#67001f");
+					}else if(populationPercentage>=70.0){
+						selCountry.attr("fill", "#980043");
+					}else if(populationPercentage>=60.0){
+						selCountry.attr("fill", "#ce1256");
+					}else if(populationPercentage>=50.0){
+						selCountry.attr("fill", "#e7298a");
+					}else if(populationPercentage>=40.0){
+						selCountry.attr("fill", "#df65b0");
+					}else if(populationPercentage>=30.0){
+						selCountry.attr("fill", "#c994c7");
+					}else if(populationPercentage>=20.0){
+						selCountry.attr("fill", "#d4b9da");
+					}else if(populationPercentage>=10.0){
+						selCountry.attr("fill", "#e7e1ef");
+					}else if(populationPercentage>=0.0){
+						selCountry.attr("fill", "#f7f4f9");
+					}
+					selCountry.append("text").text(country+" "+populationPercentage)
+				}catch(error){
+					console.log("Error! Can't find country "+country+" in world map.")
+				}
+			})
 		}
+		
+		
 		
 	
