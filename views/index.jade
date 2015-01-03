@@ -17,6 +17,8 @@ block content
 			} else {
 				svg.selectAll("path").attr("fill", "red");
 				svg.select("#AU").attr("fill", "yellow");
+				svg.select('path[title="Afghanistan"]').attr("fill", "#dd1c77");
+				
 				//d3.select("#AU").attr("fill", "yellow");
 				fillColorPopulation()
 			}
@@ -25,28 +27,10 @@ block content
 		
 		function fillColorPopulation(){
 			//myDa
+			//Traverse the data sent my server in myData
+			myData.tbody.tr.forEach(){
+			
+			}
 		}
 		
-	//script.
-		//$("title:contains('Russian Federation')").css('fill', 'red')
-		//d3.select("#sa").attr('fill', 'red');
-		//var svg = d3.select("svg")//.append("svg")		
-		//svg.selectAll('path').attr('fill', function(d){console.log(d);return 'red'})
-			
-	//script.
-		var svg = d3.xml("/images/worldLow_final_named.svg", function(xml) {
-			document.body.appendChild(xml.documentElement);
-			
-			//d3.selectAll('path').attr('fill', 'red');
-			
-			//d3.select("svg").select('#AU').attr('fill', 'blue');
-			
-			//console.log(souSudan)
-			var circle = d3.select("svg").append("circle")
-				.attr("cx", 100)
-				.attr("cy", 100)
-				.attr("r", 20)
-				.style("fill", "red");
-		});
-		//$('#AU').css('fill', 'red')
-		//svg.attr("width", 1000).attr("height", 600);
+	
